@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui">
+    <div class="row float-left mt-lg-5">
+        <div class="col-12">
+            <p:dataTable styleClass="w-100" id="pessoasCollection"
+                         value="#{pessoaBean.pessoasCollection}"
+                         var="pessoa"
+                         rowKey="#{pessoa.id}"
+                         selectionMode="single"
+                         scrollable="true"
+                         scrollHeight="300"
+                         emptyMessage="Nenhum registro encontrado">
+                <p:column headerText="Nome">
+                    <p:commandLink ajax="false" value="#{pessoa.nome}" action="#{pessoaBean.carregarDadosUsuario(pessoa)}"
+                                     update=":pessoa_form_edit:pessoaPanel, growl" rendered="#{pessoaBean.permitirEdicao}"/>
+                    <p:outputLabel value="#{pessoa.nome}" rendered="#{!pessoaBean.permitirEdicao}"/><br/>
+                    <p:outputLabel
+                            value="#{pessoa.endereco.logradouro}, #{pessoa.endereco.nro}. UF: #{pessoa.endereco.estado}, #{pessoa.endereco.cidade}"/>
+                </p:column>
+                <p:column headerText="Idade">
+                    <h:outputText value="#{pessoaBean.converterIdade(pessoa.idade)}"/>
+                </p:column>
+                <p:column headerText="Sexo">
+                    <h:outputText value="#{pessoa.sexo}"/>
+                </p:column>
+                <p:column headerText="Ações" rendered="#{pessoaBean.permitirExclusao}">
+                    <p:commandButton value="Excluir"
+                                     immediate="true"
+                                     action="#{pessoaBean.remover(pessoa)}"
+                                     update="pessoasCollection, growl"/>
+                </p:column>
+                <f:facet name="footer">
+                    <span class="font-bold">Total de #{fn:length(pessoaBean.pessoasCollection)} pessoas cadastradas</span>
+                </f:facet>
+            </p:dataTable>
+        </div>
+    </div>
+</ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: mateusgobo
+  Date: 13/07/2023
+  Time: 22:57
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Jsf Application Demo</title>
+    <h:outputStylesheet name="css/bootstrap.css"/>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+</h:head>
+<!--<style>-->
+<!--    input[type='text']{-->
+<!--        text-transform: uppercase;-->
+<!--    }-->
+<!--</style>-->
+<div class="container-fluid">
+    <p:growl id="growl" showDetail="true" life="5000"/>
+    <p:panel header="Cadastro Geral de Pessoas" footer="JSF Application Demo">
+        <div class="row">
+            <div class="col-2">
+                <p:menu id="menu_principal">
+                    <p:submenu label="Pessoas">
+                        <p:menuitem value="Novo Registro" ajax="false"
+                                    outcome="/pages/cadastro_geral/pessoa_registros.xhtml" icon="pi pi-save"/>
+                        <p:menuitem value="Editar Registro" ajax="false"
+                                    outcome="/pages/cadastro_geral/pessoa_registros_edit.xhtml" icon="pi pi-file"/>
+                        <p:menuitem value="Buscar Registro" ajax="false"
+                                    outcome="/pages/cadastro_geral/pessoa_filtro.xhtml" icon="pi pi-eye"/>
+                    </p:submenu>
+                </p:menu>
+            </div>
+            <div class="col-10">
+                <ui:insert name="body"></ui:insert>
+            </div>
+        </div>
+    </p:panel>
+</div>
+
+</html>

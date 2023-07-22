@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="ejb" url="file://$USER_HOME$/git/cst-portal-prime/csf-app/complianceEnterpriseServer-ejb" />
+    <file type="javaeeApplication" url="file://$USER_HOME$/git/cst-portal-prime/csf-app/complianceEnterpriseServer-ear" />
+    <file type="web" url="file://$USER_HOME$/git/cst-portal-prime/csf-app/complianceEnterpriseServer-prime" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$USER_HOME$/NetBeansProjects/jsf_application" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$USER_HOME$/NetBeansProjects/jsf_application/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-domain-nfse-nosql-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-domain-nfse-oracle-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-dto-nfse-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-nfse-repositores-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-nfse-repositores-nosql-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-nfse-repositores-oracle-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-rabbit-nfse-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-util-17/pom.xml" />
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
