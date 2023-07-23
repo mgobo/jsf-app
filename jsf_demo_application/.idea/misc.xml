@@ -18,6 +18,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-domain-nfse-17/pom.xml" />
         <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-domain-nfse-nosql-17/pom.xml" />
         <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-domain-nfse-oracle-17/pom.xml" />
         <option value="$USER_HOME$/git/cst-services-nfse/cst-nfse-packaging-bom/cst-dto-nfse-17/pom.xml" />

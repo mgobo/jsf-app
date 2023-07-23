@@ -83,6 +83,7 @@
     </dependencies>
 
     <build>
+        <finalName>jsf_demo_application</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

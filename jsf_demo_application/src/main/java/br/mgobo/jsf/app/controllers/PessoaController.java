@@ -85,19 +85,19 @@ public class PessoaController implements CrudImpl<Pessoa> {
         List<Predicate> predicates = new ArrayList<>();
         if (pessoa != null) {
             if (pessoa.getNome() != null && !pessoa.getNome().equals(""))
-                predicates.add(cb.like(from.get(Pessoa_.nome), pessoa.getNome() + "%"));
+                predicates.add(cb.like(cb.upper(from.get(Pessoa_.nome)), pessoa.getNome().toUpperCase() + "%"));
             if (pessoa.getSexo() != null && !pessoa.getSexo().equals(""))
                 predicates.add(cb.equal(from.get(Pessoa_.sexo), pessoa.getSexo()));
         }
         if (endereco != null) {
             if (endereco.getLogradouro() != null && !endereco.getLogradouro().equals(""))
-                predicates.add(cb.like(enderecoJoin.get(Endereco_.logradouro), "%" + endereco.getLogradouro() + "%"));
+                predicates.add(cb.like(cb.upper(enderecoJoin.get(Endereco_.logradouro)), "%" + endereco.getLogradouro().toUpperCase() + "%"));
             if (endereco.getNro() != null)
                 predicates.add(cb.equal(enderecoJoin.get(Endereco_.nro), endereco.getNro()));
             if (endereco.getEstado() != null && !endereco.getEstado().equals(""))
-                predicates.add(cb.equal(enderecoJoin.get(Endereco_.estado), endereco.getEstado()));
+                predicates.add(cb.equal(cb.upper(enderecoJoin.get(Endereco_.estado)), endereco.getEstado().toUpperCase()));
             if (endereco.getCidade() != null && !endereco.getCidade().equals(""))
-                predicates.add(cb.equal(enderecoJoin.get(Endereco_.cidade), endereco.getCidade()));
+                predicates.add(cb.like(cb.upper(enderecoJoin.get(Endereco_.cidade)), "%" + endereco.getCidade().toUpperCase() + "%"));
         }
         return predicates;
     }
