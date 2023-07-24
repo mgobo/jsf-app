@@ -6,6 +6,7 @@ import br.mgobo.jsf.app.beans.mapper.EnderecoMapperImpl;
 import br.mgobo.jsf.app.beans.mapper.PessoaMapperImpl;
 import br.mgobo.jsf.app.domain.Endereco;
 import br.mgobo.jsf.app.domain.Pessoa;
+import br.mgobo.jsf.app.util.JsfUtilities;
 import br.mgobo.jsf.app.facade.PessoaFacade;
 
 import javax.annotation.PostConstruct;
@@ -17,19 +18,15 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import javax.validation.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Named
 @ViewScoped
-public class PessoaBean implements Serializable {
+public class PessoaBean extends JsfUtilities implements Serializable {
     public static final long serialVersionUID = 1l;
     @PersistenceContext
     private EntityManager entityManager;
@@ -90,16 +87,6 @@ public class PessoaBean implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pessoa registrada com sucesso!");
     }
 
-    private String actionValidationUpdateForm(Object data){
-        StringBuilder sb = new StringBuilder("");
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
-        Set<ConstraintViolation<Object>> violations = validator.validate(data);
-        violations.stream().forEach(s->sb.append(s.getMessage()).append("\n"));
-
-        return sb.toString();
-    }
-
     private void atualizarUsuario() throws Exception {
         Pessoa pessoaEntity = this.pessoaMapper.toEntity(this.getPessoaDto());
         Endereco enderecoEtity = this.enderecoMapper.toEntity(this.getPessoaDto());
@@ -107,8 +94,8 @@ public class PessoaBean implements Serializable {
         this.setPessoa(pessoaEntity);
         this.setEndereco(enderecoEtity);
 
-        String msg = this.actionValidationUpdateForm(this.getPessoa());
-        if(msg.equals(""))msg = this.actionValidationUpdateForm(this.getEndereco());
+        String msg = this.pessoaFacade.actionValidationUpdateForm(this.getPessoa());
+        if(msg.equals(""))msg = this.pessoaFacade.actionValidationUpdateForm(this.getEndereco());
 
         if(msg.equals("")) {
             this.getPessoa().setEndereco(enderecoEtity);
@@ -151,11 +138,6 @@ public class PessoaBean implements Serializable {
         }
     }
 
-    public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().
-                addMessage(null, new FacesMessage(severity, summary, detail));
-    }
-
     public void buscarPessoas() {
         try {
             Pessoa p = this.pessoaMapper.toEntity(this.pessoaDto);
@@ -167,16 +149,6 @@ public class PessoaBean implements Serializable {
         } catch (Exception ex) {
             this.addMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro na conversao de dados. [Erro] = " + ex.getMessage());
         }
-    }
-
-    public String converterIdade(String idade) {
-        if (idade != null && !idade.equals("")) {
-            Integer ano = Integer.parseInt(idade.split("-")[0]);
-            Integer anoCorrente = Instant.now().atZone(ZoneId.systemDefault()).getYear();
-            Integer resultado = anoCorrente - ano;
-            idade = (resultado < 1 ? resultado + " mes(es)" : (resultado == 1 ? resultado + " ano" : resultado + " anos"));
-        }
-        return idade;
     }
 
     public Pessoa getPessoa() {
@@ -250,5 +222,9 @@ public class PessoaBean implements Serializable {
 
     public void setPessoaDto(PessoaDto pessoaDto) {
         this.pessoaDto = pessoaDto;
+    }
+
+    public PessoaFacade getPessoaFacade() {
+        return pessoaFacade;
     }
 }

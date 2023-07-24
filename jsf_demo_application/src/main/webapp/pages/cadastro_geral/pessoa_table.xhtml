@@ -25,7 +25,7 @@
                             value="#{pessoa.endereco.logradouro}, #{pessoa.endereco.nro}. UF: #{pessoa.endereco.estado}, #{pessoa.endereco.cidade}"/>
                 </p:column>
                 <p:column headerText="Idade">
-                    <h:outputText value="#{pessoaBean.converterIdade(pessoa.idade)}"/>
+                    <h:outputText value="#{pessoaBean.pessoaFacade.converterIdade(pessoa.idade)}"/>
                 </p:column>
                 <p:column headerText="Sexo">
                     <h:outputText value="#{pessoa.sexo}"/>
