@@ -1,11 +1,11 @@
-### JSF APPLICATION DEMO (CRUD app com JPA e Criteria 2 com  FACADE,  Dto, JSF 2.3, Primefaces 11, Bean Validation rodando com JDK 17 e Wildfly 26)
+
 *__Pre-requisitos__*  
 1. A máquina *__host__* obrigatóriamente deve possuir *__DOCKER ENGINE__*.
 2. De memória RAM, o mínimo seriam *__4GB__*, o recomendado é *__8GB__*.
 
 *__Para instalação em ambientes LINUX, acesse o host:__*  
 [DOCKER FOR LINUX UBUNTU](https://docs.docker.com/engine/install/ubuntu/)
-   
+### JSF APPLICATION DEMO (CRUD app com JPA, Criteria 2, FACADE,  Dto, JSF 2.3, Primefaces 11, Bean Validation rodando com JDK 17 e Wildfly 26) 
 *__Para instalação em ambientes WINDOWS, é necessária a configuração do WSL (Windows subsystem for linux) e do Docker Desktop.   
 Para isso, acesse o host:__*   
 [DOCKER FOR WINDOWS](https://docs.docker.com/desktop/install/windows-install/)   
