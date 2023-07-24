@@ -3,6 +3,7 @@ echo 'Building container....'
 docker build -t jsf_demo_application:v1 .
 
 echo 'Creating docker network...'
+docker network rm demo_app
 docker network create demo_app
 
 echo 'Wait...Starting application...'
@@ -18,7 +19,7 @@ docker run --rm  \
 	-v /opt/dockerdata/postgres:/var/lib/postgresql/data \
 	-d postgres
 
-echo 'Wait 10 seconds....'
+echo 'Waiting 10 seconds....'
 sleep 10
 
 echo 'Publish application....'

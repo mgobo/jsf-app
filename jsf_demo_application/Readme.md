@@ -19,3 +19,6 @@ Com o ambiente preparado, basta executar o arquivo **__do diretório "runnable"_
 ``cd runnable``  
 ``sh run.sh``   
 
+*__Com a aplicação em execução, acesse o host:__*   
+<http://http://localhost:8085/jsf_demo_application/>
+

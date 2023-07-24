@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import javax.validation.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -24,6 +25,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Named
 @ViewScoped
@@ -75,16 +77,27 @@ public class PessoaBean implements Serializable {
     }
 
     private void inserirNovoUsuario() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date age = sdf.parse(this.getIdade());
-
-        this.getPessoa().setIdade(age);
+        if(!this.getIdade().equals("")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date age = sdf.parse(this.getIdade());
+            this.getPessoa().setIdade(age);
+        }
         this.getEndereco().setPessoa(this.getPessoa());
         this.getPessoa().setEndereco(this.getEndereco());
 
         this.pessoaFacade.merge(this.getPessoa());
         this.carregarListaUsuarios();
         addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pessoa registrada com sucesso!");
+    }
+
+    private String actionValidationUpdateForm(Object data){
+        StringBuilder sb = new StringBuilder("");
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<Object>> violations = validator.validate(data);
+        violations.stream().forEach(s->sb.append(s.getMessage()).append("\n"));
+
+        return sb.toString();
     }
 
     private void atualizarUsuario() throws Exception {
@@ -94,12 +107,19 @@ public class PessoaBean implements Serializable {
         this.setPessoa(pessoaEntity);
         this.setEndereco(enderecoEtity);
 
-        this.getPessoa().setEndereco(enderecoEtity);
-        this.getEndereco().setPessoa(this.getPessoa());
+        String msg = this.actionValidationUpdateForm(this.getPessoa());
+        if(msg.equals(""))msg = this.actionValidationUpdateForm(this.getEndereco());
 
-        this.pessoaFacade.merge(this.getPessoa());
-        this.carregarListaUsuarios();
-        addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pessoa alterada com sucesso!");
+        if(msg.equals("")) {
+            this.getPessoa().setEndereco(enderecoEtity);
+            this.getEndereco().setPessoa(this.getPessoa());
+
+            this.pessoaFacade.merge(this.getPessoa());
+            this.carregarListaUsuarios();
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pessoa alterada com sucesso!");
+        }else{
+            addMessage(FacesMessage.SEVERITY_ERROR, "Erro", msg);
+        }
     }
 
     public void salvar(int mode) {
