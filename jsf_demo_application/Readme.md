@@ -10,7 +10,7 @@
 Para isso, acesse o host:__*   
 [DOCKER FOR WINDOWS](https://docs.docker.com/desktop/install/windows-install/)   
 
-Com o ambiente preparado, basta executar o arquivo **__do diretório "runnable"__**:   
+Com o ambiente preparado, basta executar o arquivo **__do diretório "runnable", localizado no main path "jsf_application_demo"__**:   
 
 *__Em ambientes Linux:__*  
 ``cd runnable``  
